@@ -16,7 +16,6 @@ class draggable {
 
   setupList(options) {
     let { list, el: element, template } = options;
-
     if (!element) throw Error("the list is not exists");
     if (!list) throw Error("the data is not exists");
     if (!Array.isArray(list))
@@ -30,7 +29,6 @@ class draggable {
 
   addDnDHandlers(element) {
     element.setAttribute("draggable", true);
-
     element.addEventListener("dragstart", this.handleDragStart.bind(this));
     element.addEventListener("drageneter", this.handleDragEneter.bind(this));
     element.addEventListener("dragover", this.handleDragOver.bind(this));
@@ -41,17 +39,12 @@ class draggable {
 
   handleDragStart(e) {
     this.dragSrcEl = e.target;
-
     e.dataTransfer.setData("text/html", e.target.outerHTML);
-
     e.target.classList.add("dragElem");
   }
 
-  handleDragEneter(e) {}
-
   handleDragOver(e) {
     if (e.preventDefault) e.preventDefault();
-
     e.target.classList.add("over");
   }
 
@@ -61,7 +54,6 @@ class draggable {
 
   handleDragDrop(e) {
     let target = e.target.closest(".list-item");
-
     if (this.dragSrcEl != target) {
       target.parentNode.removeChild(this.dragSrcEl);
       let dropHTML = e.dataTransfer.getData("text/html");
